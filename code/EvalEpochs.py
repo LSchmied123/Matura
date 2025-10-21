@@ -5,15 +5,15 @@ import torch
 import rules
 import matplotlib.pyplot as plt
 
-TEST_PATH = r"D:\Matura\NNnewer\sepember\minimax_training_set_symmetries.txt"
-NN_PATH = r'checkpoints_batch512'
+TEST_PATH = r"code/minimax_training_set_symmetries.txt"
+NN_PATH = r'code/selfplay_checkpoints_large'
 GAME_AMOUNT = 1000
-MAX_EPOCH = 2090
+MAX_EPOCH = 4200
 EPOCH_STEP = 100
 
 def eval_epoch_test(epoch):
     policy_net = NeuralNetData.BiggerPolicyNetwork(state_size=28, action_size=88)
-    policy_net.load_state_dict(torch.load(f'{NN_PATH}/model_epoch{epoch}.pth'))
+    policy_net.load_state_dict(torch.load(f'{NN_PATH}/selfplay_model_iter_{epoch}.pth'))
     policy_net.eval()
     actions = rules.get_actions()
 
@@ -44,7 +44,7 @@ def eval_epoch_test(epoch):
 
 def eval_epoch_play(epoch, opponent):
     policy_net = NeuralNetData.BiggerPolicyNetwork(state_size=28, action_size=88)
-    policy_net.load_state_dict(torch.load(f'{NN_PATH}/model_epoch{epoch}.pth'))
+    policy_net.load_state_dict(torch.load(f'{NN_PATH}/selfplay_model_iter_{epoch}.pth'))
     policy_net.eval()
 
     if opponent == 'random':
