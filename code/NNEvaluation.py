@@ -9,7 +9,7 @@ import math
 
 def initialize_model():
     policy_net = NeuralNetData.BiggerPolicyNetwork(state_size=28, action_size=88)
-    policy_net.load_state_dict(torch.load('selfplay_checkpoints_large/selfplay_model_iter_2600.pth'))
+    policy_net.load_state_dict(torch.load('code/selfplay_checkpoints_large/selfplay_model_iter_2600.pth'))
     policy_net.eval()
     return policy_net
 
@@ -62,6 +62,7 @@ def match(player1, player2, matches, policy_net, opening_random_moves: int = 0):
                     elif player1 == '2':
                         board, move = NN_player_move(board, move_count, 1, policy_net)
                     elif player1 == '3':
+                        print("your turn, write place/move and then coordinates like 'place 3 4' or 'move 3 4 2 4'")
                         move_raw = display.display_board(board)
                         board, move = player_move(board, move_count, 1, move_raw)
                     elif player1 == '4':
@@ -89,6 +90,7 @@ def match(player1, player2, matches, policy_net, opening_random_moves: int = 0):
                     elif player2 == '2':
                         board, move = NN_player_move(board, move_count, 2, policy_net)
                     elif player2 == '3':
+                        print("your turn, write place/move and then coordinates like 'place 3 4' or 'move 3 4 2 4'")
                         move_raw = display.display_board(board)
                         board, move = player_move(board, move_count, 2, move_raw)
                     elif player2 == '4':
